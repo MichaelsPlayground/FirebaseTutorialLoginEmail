@@ -45,18 +45,18 @@ public class LogInEmailPasswordActivity extends AppCompatActivity {
                 }
                 // start the auth process
                 FirebaseUtils.loginUserWithEmailPassword(LogInEmailPasswordActivity.this, userEmail, userPassword);
-                boolean successfulLogin = FirebaseUtils.signupWasSuccessful();
-                if (successfulLogin) {
+                boolean successfulAuthentication = FirebaseUtils.authenticationWasSuccessful();
+                if (successfulAuthentication) {
                     firebaseUser = FirebaseUtils.getCurrentUser();
                     if (firebaseUser != null) {
-                        String message = "new user loged in with email: " + FirebaseUtils.getCurrentUserEmail(firebaseUser);
+                        String message = "user loged in with email: " + FirebaseUtils.getCurrentUserEmail(firebaseUser);
                         status.setText(message);
                     } else {
                         String message ="no email address available";
                         status.setText(message);
                     }
                 } else {
-                    String message ="error while sign in new user";
+                    String message ="error while log in user";
                     status.setText(message);
                 }
 
@@ -66,25 +66,9 @@ public class LogInEmailPasswordActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                // start the auth process
-                //FirebaseUtils.createUserWithEmailPassword(SignUpEmailPasswordActivity.this, userEmail, userPassword);
-                boolean successfulSignup = FirebaseUtils.signupWasSuccessful();
-                if (successfulSignup) {
-                    firebaseUser = FirebaseUtils.getCurrentUser();
-                    if (firebaseUser != null) {
-                        String message = "new user loged in with email: " + FirebaseUtils.getCurrentUserEmail(firebaseUser);
-                        status.setText(message);
-                    } else {
-                        String message ="no email address available";
-                        status.setText(message);
-                    }
-                } else {
-                    String message ="error while sign in new user";
-                    status.setText(message);
-                }
-
+                Intent intent = new Intent(LogInEmailPasswordActivity.this, LogInEmailPasswordActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

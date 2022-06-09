@@ -46,8 +46,8 @@ public class SignUpEmailPasswordActivity extends AppCompatActivity {
 
                 // start the auth process
                 FirebaseUtils.createUserWithEmailPassword(SignUpEmailPasswordActivity.this, userEmail, userPassword);
-                boolean successfulSignup = FirebaseUtils.signupWasSuccessful();
-                if (successfulSignup) {
+                boolean successfulAuthentication = FirebaseUtils.authenticationWasSuccessful();
+                if (successfulAuthentication) {
                     firebaseUser = FirebaseUtils.getCurrentUser();
                     if (firebaseUser != null) {
                         String message = "new user loged in with email: " + FirebaseUtils.getCurrentUserEmail(firebaseUser);

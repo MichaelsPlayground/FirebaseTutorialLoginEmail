@@ -16,7 +16,7 @@ public class FirebaseUtils {
 
     private static String TAG = "FirebaseUtils";
     private static boolean isUserLogedIn;
-    private static boolean signupSuccessful;
+    private static boolean authenticationSuccessful;
     private static FirebaseUser currentUser;
     private static FirebaseAuth mAuth;
 
@@ -58,7 +58,7 @@ public class FirebaseUtils {
                             Log.d(TAG, "logInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             currentUser = user;
-                            signupSuccessful = true;
+                            authenticationSuccessful = true;
                             Intent intent = new Intent(activity,MainActivity.class);
                             activity.startActivity(intent);
                             activity.finish();
@@ -66,7 +66,7 @@ public class FirebaseUtils {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "logInWithEmail:failure", task.getException());
                             currentUser = null;
-                            signupSuccessful = false;
+                            authenticationSuccessful = false;
                         }
                     }
                 });
@@ -74,7 +74,7 @@ public class FirebaseUtils {
     }
 
     public static void createUserWithEmailPassword(Activity activity, String email, String password) {
-        signupSuccessful = false;
+        authenticationSuccessful = false;
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -86,7 +86,7 @@ public class FirebaseUtils {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             currentUser = user;
-                            signupSuccessful = true;
+                            authenticationSuccessful = true;
                             Intent intent = new Intent(activity,MainActivity.class);
                             activity.startActivity(intent);
                             activity.finish();
@@ -94,20 +94,20 @@ public class FirebaseUtils {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             currentUser = null;
-                            signupSuccessful = false;
+                            authenticationSuccessful = false;
                         }
                     }
                 });
     }
 
-    public static boolean signupWasSuccessful() {
-        return signupSuccessful;
+    public static boolean authenticationWasSuccessful() {
+        return authenticationSuccessful;
     }
 
     public static void logoutUser() {
         FirebaseAuth.getInstance().signOut();
         currentUser = null;
-        signupSuccessful = false;
+        authenticationSuccessful = false;
         isUserLogedIn = false;
     }
 }
