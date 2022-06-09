@@ -1,13 +1,13 @@
 package de.androidcrypto.firebasetutorial;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class SignUpEmailPasswordActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class SignUpEmailPasswordActivityStep1 extends AppCompatActivity {
 
     Button signUp, cancel, logIn;
     EditText email, password, status;

@@ -125,6 +125,12 @@ there is a registration limit for new users, at the moment it is limited to regi
 100 new email addresses per hour. The limit may change in the future or when using a 
 Firebase payed plan, I'm using a free "Spark" plan for my tutorial.
 
+As a last view let's move to the "Users" tab in Authentication submenu. At the moment 
+there are no users because we haven't signed up any user but you could add a user 
+manually by pressing the button "Nutzer hinzufuegen" = "add a new user".
+
+
+
 data from signingReport
 ```plaintext
 > Task :app:signingReport
@@ -182,6 +188,8 @@ Zusätzliche Anbieter = additional provider
 E-Mailadresse/Passwort"= email address / password
 E-Mail-Link = email link
 Aktiviert = activated
+
+Nutzer hinzufuegen = add a new user
 ```
 
 ```plaintext
