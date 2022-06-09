@@ -14,10 +14,14 @@
         android:theme="@style/Theme.FirebaseTutorialLoginEmail"
         tools:targetApi="32">
         <activity
+            android:name=".SignUpEmailPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

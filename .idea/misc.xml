@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/fui_ic_mail_white_24dp.xml" value="0.166" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_sign_up_email_password.xml" value="0.1111111111111111" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.25905797101449274" />
       </map>
     </option>

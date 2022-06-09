@@ -120,6 +120,10 @@ NOT the second option "E-Mail-Link" ("email link"). Procced with "speichern" = "
 The "Sign-in method"-tag shows that we have activated the authentication with an  
 Email address and password ("Aktiviert" = "activated"). 
 
+Now we are ready to use Firebase Authentication with email address and password. Below on the page you get a notice that 
+there is a registration limit for new users, at the moment it is limited to register 
+100 new email addresses per hour. The limit may change in the future or when using a 
+Firebase payed plan, I'm using a free "Spark" plan for my tutorial.
 
 data from signingReport
 ```plaintext
@@ -178,12 +182,13 @@ Zusätzliche Anbieter = additional provider
 E-Mailadresse/Passwort"= email address / password
 E-Mail-Link = email link
 Aktiviert = activated
-
-
-
 ```
 
-
+```plaintext
+Registrierungskontingent verwalten
+Wir begrenzen die Anzahl neuer E-Mail-Adressen/Passwörter und anonymer Registrierungen, die für Ihre Anwendung über dieselbe IP-Adresse möglich sind, um einen Missbrauch Ihres Projekts zu verhindern. Temporäre Änderungen an diesem Kontingent können Sie hier anfordern und planen.
+Aktuelles Kontingent pro Stunde: 100
+```
 
 
 
