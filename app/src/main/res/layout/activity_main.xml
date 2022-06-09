@@ -79,6 +79,16 @@
             android:text="logout user" />
 
         <Button
+            android:id="@+id/btnDeleteUserPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:drawableLeft="@drawable/ic_baseline_delete_outline_24"
+            android:text="delete user password" />
+
+        <Button
             android:id="@+id/btnSignupEmailPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

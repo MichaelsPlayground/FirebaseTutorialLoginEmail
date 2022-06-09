@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,9 +19,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class ChangeUserEmailPassword extends AppCompatActivity {
 
+    private static final String TAG = "ChangePassword";
     Button change, cancel;
     EditText email, passwordOld, passwordNew, status;
     FirebaseUser firebaseUser;
+
+    // ### important: this activity is called only when a user is loged in
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,14 @@ public class ChangeUserEmailPassword extends AppCompatActivity {
         passwordOld = findViewById(R.id.etChangePasswordOld);
         passwordNew = findViewById(R.id.etChangePasswordNew);
         status = findViewById(R.id.etChangeStatus);
+
+        firebaseUser = FirebaseUtils.getCurrentUser();
+        if (firebaseUser == null) {
+            Intent intent = new Intent(ChangeUserEmailPassword.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        email.setText(FirebaseUtils.getCurrentUserEmail(firebaseUser));
 
         change.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,10 +75,11 @@ public class ChangeUserEmailPassword extends AppCompatActivity {
 
                 // todo change of email address disabling
 
-                FirebaseUtils.changeUserPasswordWithEmailPassword(ChangeUserEmailPassword.this, userPasswordOld, userPasswordNew);
-/*
+                //FirebaseUtils.changeUserPasswordWithEmailPassword(ChangeUserEmailPassword.this, userPasswordOld, userPasswordNew);
+
                 // start the auth process
                 final String email = user.getEmail();
+                System.out.println("*** email: " + email);
                 AuthCredential credential = EmailAuthProvider.getCredential(email,userPasswordOld);
                 FirebaseUser finalUser = user;
                 user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -78,18 +91,23 @@ public class ChangeUserEmailPassword extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(!task.isSuccessful()){
                                         status.setText("Error while changing the password");
+                                        Log.d(TAG, "changePasswordWithEmail:failure");
                                     }else {
                                         status.setText("Password change was successful");
+                                        Log.d(TAG, "changePasswordWithEmail:success");
+                                        Intent intent = new Intent(ChangeUserEmailPassword.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
                                     }
                                 }
                             });
-                        }else {
+                        } else {
                             status.setText("Authentication Failed");
+                            Log.d(TAG, "changePasswordWithEmail:Authentication failed");
                         }
                     }
-                });*/
+                });
             }
-
         });
 
         cancel.setOnClickListener(new View.OnClickListener() {

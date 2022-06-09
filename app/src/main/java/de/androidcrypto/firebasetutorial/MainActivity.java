@@ -1,7 +1,9 @@
 package de.androidcrypto.firebasetutorial;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button loginEmailPassword, signupEmailPassword, logoutUser, changeUserPassword;
+    Button loginEmailPassword, signupEmailPassword, logoutUser, changeUserPassword, deleteUserPassword;
     EditText loginStatus;
     Intent signupIntent, loginIntent, changeUserPasswordIntent;
 
@@ -30,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
         signupEmailPassword = findViewById(R.id.btnSignupEmailPassword);
         logoutUser = findViewById(R.id.btnLogoutUser);
         changeUserPassword = findViewById(R.id.btnChangeUserPassword);
+        deleteUserPassword = findViewById(R.id.btnDeleteUserPassword);
         loginStatus = findViewById(R.id.etLoginStatus);
         signupIntent = new Intent(MainActivity.this, SignUpEmailPasswordActivity.class);
         loginIntent = new Intent(MainActivity.this, LogInEmailPasswordActivity.class);
         changeUserPasswordIntent = new Intent(MainActivity.this, ChangeUserEmailPassword.class);
 
-        // todo delete account
         // todo send password reset link
         // todo email signup with account verification
 
@@ -66,6 +68,43 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseUtils.logoutUser();
                 loginStatus.setText("no user loged in");
+            }
+        });
+
+        deleteUserPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
+                alert.setTitle("Delete the loged in user ?");
+                alert.setMessage("Are you sure you want to delete ?");
+                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // todo surround the deletion with try/catch for
+                        // FirebaseAuthInvalidUserException and
+                        // FirebaseAuthRecentLoginRequiredException
+/*
+FirebaseAuthInvalidUserException thrown if the current user's account has been disabled, deleted,
+ or its credentials are no longer valid
+FirebaseAuthRecentLoginRequiredException thrown if the user's last sign-in time does not meet the
+ security threshold. Use reauthenticate(AuthCredential) to resolve. This does not apply if the
+ user is anonymous.
+*/
+                        FirebaseAuth.getInstance().getCurrentUser().delete();
+
+                        dialog.dismiss();
+                    }
+                });
+
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alert.show();
             }
         });
 

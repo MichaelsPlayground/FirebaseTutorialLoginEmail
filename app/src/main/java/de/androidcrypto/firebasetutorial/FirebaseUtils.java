@@ -75,36 +75,39 @@ public class FirebaseUtils {
 
     }
 
-
     public static void changeUserPasswordWithEmailPassword(Activity activity, String passwordOld, String passwordNew) {
         FirebaseUser user;
         user = FirebaseAuth.getInstance().getCurrentUser();
         final String email = user.getEmail();
-        AuthCredential credential = EmailAuthProvider.getCredential(email,passwordOld);
-        FirebaseUser finalUser = user;
-        user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    finalUser.updatePassword(passwordNew).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(!task.isSuccessful()){
-                                Log.d(TAG, "changePasswordWithEmail:success");
-                                Intent intent = new Intent(activity,MainActivity.class);
-                                activity.startActivity(intent);
-                                activity.finish();
-                            }else {
-                                Log.d(TAG, "changePasswordWithEmail:failure");
-                                //passwordChangeSuccessful = false;
+        System.out.println("*** email: " + email);
+        AuthCredential credential = null;
+        if (email != null) {
+            credential = EmailAuthProvider.getCredential(email, passwordOld);
+            FirebaseUser finalUser = user;
+            user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        finalUser.updatePassword(passwordNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (!task.isSuccessful()) {
+                                    Log.d(TAG, "changePasswordWithEmail:success");
+                                    Intent intent = new Intent(activity, MainActivity.class);
+                                    activity.startActivity(intent);
+                                    activity.finish();
+                                } else {
+                                    Log.d(TAG, "changePasswordWithEmail:failure");
+                                    //passwordChangeSuccessful = false;
+                                }
                             }
-                        }
-                    });
-                }else {
-                    Log.d(TAG, "changePasswordWithEmail:authentication failure");
+                        });
+                    } else {
+                        Log.d(TAG, "changePasswordWithEmail:authentication failure");
+                    }
                 }
-            }
-        });
+            });
+        }
     }
     public static void createUserWithEmailPassword(Activity activity, String email, String password) {
         authenticationSuccessful = false;
