@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button loginEmailPassword, signupEmailPassword;
+    Button loginEmailPassword, signupEmailPassword, logoutUser;
     EditText loginStatus;
     Intent signupIntent, loginIntent;
 
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         // bindings
         loginEmailPassword = findViewById(R.id.btnLoginEmailPassword);
         signupEmailPassword = findViewById(R.id.btnSignupEmailPassword);
+        logoutUser = findViewById(R.id.btnLogoutUser);
         loginStatus = findViewById(R.id.etLoginStatus);
         signupIntent = new Intent(MainActivity.this, SignUpEmailPasswordActivity.class);
 
@@ -38,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
         if (isUserLogedIn) {
             loginStatus.setText("user " + getCurrentUserEmail() + " with ID: " + getCurrentUserId());
         }
+
+
+        logoutUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUtils.logoutUser();
+                loginStatus.setText("no user loged in");
+            }
+        });
 
         signupEmailPassword.setOnClickListener(new View.OnClickListener() {
             @Override

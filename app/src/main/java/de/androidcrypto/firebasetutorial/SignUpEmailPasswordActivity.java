@@ -2,15 +2,19 @@ package de.androidcrypto.firebasetutorial;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseUser;
+
 public class SignUpEmailPasswordActivity extends AppCompatActivity {
 
     Button signUp, cancel, logIn;
     EditText email, password, status;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,34 @@ public class SignUpEmailPasswordActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // sanity checks
+                String userEmail = email.getText().toString();
+                String userPassword = password.getText().toString();
+                if (userEmail.equals("")) {
+                    System.out.println("*** Error: Email is empty ***");
+                    return;
+                }
+                if (userPassword.equals("")) {
+                    System.out.println("*** Error: Password is empty ***");
+                    return;
+                }
+
+                // start the auth process
+                FirebaseUtils.createUserWithEmailPassword(SignUpEmailPasswordActivity.this, userEmail, userPassword);
+                boolean successfulSignup = FirebaseUtils.signupWasSuccessful();
+                if (successfulSignup) {
+                    firebaseUser = FirebaseUtils.getCurrentUser();
+                    if (firebaseUser != null) {
+                        String message = "new user loged in with email: " + FirebaseUtils.getCurrentUserEmail(firebaseUser);
+                        status.setText(message);
+                    } else {
+                        String message ="no email address available";
+                        status.setText(message);
+                    }
+                } else {
+                    String message ="error while sign in new user";
+                    status.setText(message);
+                }
 
             }
         });
@@ -35,7 +67,9 @@ public class SignUpEmailPasswordActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(SignUpEmailPasswordActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

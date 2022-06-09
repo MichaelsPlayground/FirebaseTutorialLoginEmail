@@ -21,26 +21,6 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnLoginEmailPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:drawableLeft="@drawable/ic_baseline_email_24"
-            android:text="login with Email and password" />
-
-        <Button
-            android:id="@+id/btnSignupEmailPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:drawableLeft="@drawable/ic_baseline_email_24"
-            android:text="Sign up with Email and password" />
-
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -63,11 +43,40 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:focusable="false"
-                android:maxLines="1"
+                android:maxLines="3"
                 android:text="not available"
                 tools:ignore="KeyboardInaccessibleWidget" />
-
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnLoginEmailPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:drawableLeft="@drawable/ic_baseline_email_24"
+            android:text="login with Email and password" />
+
+        <Button
+            android:id="@+id/btnLogoutUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:drawableLeft="@drawable/ic_baseline_logout_24"
+            android:text="logout user" />
+
+        <Button
+            android:id="@+id/btnSignupEmailPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:drawableLeft="@drawable/ic_baseline_email_24"
+            android:text="Sign up with Email and password" />
 
     </LinearLayout>
 </ScrollView>
