@@ -46,6 +46,33 @@ public class FirebaseUtils {
         }
     }
 
+    public static void loginUserWithEmailPassword(Activity activity, String email, String password) {
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "logInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            currentUser = user;
+                            signupSuccessful = true;
+                            Intent intent = new Intent(activity,MainActivity.class);
+                            activity.startActivity(intent);
+                            activity.finish();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "logInWithEmail:failure", task.getException());
+                            currentUser = null;
+                            signupSuccessful = false;
+                        }
+                    }
+                });
+
+    }
+
     public static void createUserWithEmailPassword(Activity activity, String email, String password) {
         signupSuccessful = false;
         // Initialize Firebase Auth

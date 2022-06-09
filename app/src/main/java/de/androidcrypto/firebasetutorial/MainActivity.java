@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         logoutUser = findViewById(R.id.btnLogoutUser);
         loginStatus = findViewById(R.id.etLoginStatus);
         signupIntent = new Intent(MainActivity.this, SignUpEmailPasswordActivity.class);
+        loginIntent = new Intent(MainActivity.this, LogInEmailPasswordActivity.class);
 
         // get the login status from FirebaseAuth
         currentUser = getCurrentUser();
@@ -40,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
             loginStatus.setText("user " + getCurrentUserEmail() + " with ID: " + getCurrentUserId());
         }
 
+        loginEmailPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(loginIntent);
+            }
+        });
 
         logoutUser.setOnClickListener(new View.OnClickListener() {
             @Override

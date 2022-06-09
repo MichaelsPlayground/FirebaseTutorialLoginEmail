@@ -1,16 +1,16 @@
 package de.androidcrypto.firebasetutorial;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignUpEmailPasswordActivity extends AppCompatActivity {
+public class LogInEmailPasswordActivity extends AppCompatActivity {
 
     Button signUp, cancel, logIn;
     EditText email, password, status;
@@ -19,17 +19,17 @@ public class SignUpEmailPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_email_password);
+        setContentView(R.layout.activity_log_in_email_password);
 
         // bindings
-        signUp = findViewById(R.id.btnSignupSignUp);
-        cancel = findViewById(R.id.btnSignupCancel);
-        logIn = findViewById(R.id.btnSignupLogin);
-        email = findViewById(R.id.etSignupEmail);
-        password = findViewById(R.id.etSignupPassword);
-        status = findViewById(R.id.etSignupStatus);
+        signUp = findViewById(R.id.btnLoginSignUp);
+        cancel = findViewById(R.id.btnLoginCancel);
+        logIn = findViewById(R.id.btnLoginLogin);
+        email = findViewById(R.id.etLoginEmail);
+        password = findViewById(R.id.etLoginPassword);
+        status = findViewById(R.id.etLoginStatus);
 
-        signUp.setOnClickListener(new View.OnClickListener() {
+        logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // sanity checks
@@ -43,9 +43,33 @@ public class SignUpEmailPasswordActivity extends AppCompatActivity {
                     System.out.println("*** Error: Password is empty ***");
                     return;
                 }
+                // start the auth process
+                FirebaseUtils.loginUserWithEmailPassword(LogInEmailPasswordActivity.this, userEmail, userPassword);
+                boolean successfulLogin = FirebaseUtils.signupWasSuccessful();
+                if (successfulLogin) {
+                    firebaseUser = FirebaseUtils.getCurrentUser();
+                    if (firebaseUser != null) {
+                        String message = "new user loged in with email: " + FirebaseUtils.getCurrentUserEmail(firebaseUser);
+                        status.setText(message);
+                    } else {
+                        String message ="no email address available";
+                        status.setText(message);
+                    }
+                } else {
+                    String message ="error while sign in new user";
+                    status.setText(message);
+                }
+
+            }
+        });
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
 
                 // start the auth process
-                FirebaseUtils.createUserWithEmailPassword(SignUpEmailPasswordActivity.this, userEmail, userPassword);
+                //FirebaseUtils.createUserWithEmailPassword(SignUpEmailPasswordActivity.this, userEmail, userPassword);
                 boolean successfulSignup = FirebaseUtils.signupWasSuccessful();
                 if (successfulSignup) {
                     firebaseUser = FirebaseUtils.getCurrentUser();
@@ -67,19 +91,12 @@ public class SignUpEmailPasswordActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignUpEmailPasswordActivity.this, MainActivity.class);
+                Intent intent = new Intent(LogInEmailPasswordActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-        logIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SignUpEmailPasswordActivity.this, LogInEmailPasswordActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
     }
 }
