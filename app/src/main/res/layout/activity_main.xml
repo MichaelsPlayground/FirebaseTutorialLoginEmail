@@ -59,6 +59,16 @@
             android:text="login with Email and password" />
 
         <Button
+            android:id="@+id/btnChangeUserPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:drawableLeft="@drawable/ic_baseline_published_with_changes_24"
+            android:text="change user password" />
+
+        <Button
             android:id="@+id/btnLogoutUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

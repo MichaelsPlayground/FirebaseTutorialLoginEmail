@@ -8,7 +8,9 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -73,6 +75,37 @@ public class FirebaseUtils {
 
     }
 
+
+    public static void changeUserPasswordWithEmailPassword(Activity activity, String passwordOld, String passwordNew) {
+        FirebaseUser user;
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        final String email = user.getEmail();
+        AuthCredential credential = EmailAuthProvider.getCredential(email,passwordOld);
+        FirebaseUser finalUser = user;
+        user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    finalUser.updatePassword(passwordNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(!task.isSuccessful()){
+                                Log.d(TAG, "changePasswordWithEmail:success");
+                                Intent intent = new Intent(activity,MainActivity.class);
+                                activity.startActivity(intent);
+                                activity.finish();
+                            }else {
+                                Log.d(TAG, "changePasswordWithEmail:failure");
+                                //passwordChangeSuccessful = false;
+                            }
+                        }
+                    });
+                }else {
+                    Log.d(TAG, "changePasswordWithEmail:authentication failure");
+                }
+            }
+        });
+    }
     public static void createUserWithEmailPassword(Activity activity, String email, String password) {
         authenticationSuccessful = false;
         // Initialize Firebase Auth

@@ -14,6 +14,9 @@
         android:theme="@style/Theme.FirebaseTutorialLoginEmail"
         tools:targetApi="32">
         <activity
+            android:name=".ChangeUserEmailPassword"
+            android:exported="false" />
+        <activity
             android:name=".LogInEmailPasswordActivity"
             android:exported="false" />
         <activity
