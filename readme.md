@@ -198,6 +198,15 @@ Wir begrenzen die Anzahl neuer E-Mail-Adressen/Passwörter und anonymer Registri
 Aktuelles Kontingent pro Stunde: 100
 ```
 
-
+Mail when sending a password reset link
+```plaintext
+Reset your password for project-938397672907
+Hello,
+Follow this link to reset your project-938397672907 password for your edvmf@gmx.de account.
+https://fir-tutorial-73344.firebaseapp.com/__/auth/action?mode=resetPassword&oobCode=RKlVUbOmVZG9bLJmxG24BECcKeo2k1fzYBU9vPnc6CUAAAGBSpN2dg&apiKey=AIzaSyAzT4-gG3ak33WUlk6b2aZQ4AV7XQfdwQE&lang=en
+If you didn’t ask to reset your password, you can ignore this email.
+Thanks,
+Your project-938397672907 team
+```
 
 

@@ -15,7 +15,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button loginEmailPassword, signupEmailPassword, logoutUser, changeUserPassword, deleteUserPassword;
+    Button loginEmailPassword, signupEmailPassword, logoutUser, changeUserPassword,
+            deleteUserPassword, sendUserPasswordReset;
     EditText loginStatus;
     Intent signupIntent, loginIntent, changeUserPasswordIntent;
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         logoutUser = findViewById(R.id.btnLogoutUser);
         changeUserPassword = findViewById(R.id.btnChangeUserPassword);
         deleteUserPassword = findViewById(R.id.btnDeleteUserPassword);
+        sendUserPasswordReset = findViewById(R.id.btnSendUserPasswordReset);
         loginStatus = findViewById(R.id.etLoginStatus);
         signupIntent = new Intent(MainActivity.this, SignUpEmailPasswordActivity.class);
         loginIntent = new Intent(MainActivity.this, LogInEmailPasswordActivity.class);
@@ -68,6 +70,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseUtils.logoutUser();
                 loginStatus.setText("no user loged in");
+            }
+        });
+
+        sendUserPasswordReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SendUserEmailPasswordReset.class);
+                startActivity(intent);
             }
         });
 

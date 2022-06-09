@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:drawableLeft="@drawable/ic_baseline_published_with_changes_24"
             android:text="change user password" />
@@ -73,17 +73,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:drawableLeft="@drawable/ic_baseline_logout_24"
             android:text="logout user" />
+
+        <Button
+            android:id="@+id/btnSendUserPasswordReset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:drawableLeft="@drawable/ic_baseline_lock_reset_24"
+            android:text="send user password reset link" />
 
         <Button
             android:id="@+id/btnDeleteUserPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:drawableLeft="@drawable/ic_baseline_delete_outline_24"
             android:text="delete user password" />
@@ -93,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:drawableLeft="@drawable/ic_baseline_email_24"
             android:text="Sign up with Email and password" />
